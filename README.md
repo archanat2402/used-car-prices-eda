@@ -1,7 +1,5 @@
 # 🚗 Exploratory Data Analysis: Used Car Prices
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/<your-username>/used-car-prices-eda/blob/main/Used_Car_Prices_EDA.ipynb)
-
 An end-to-end exploratory data analysis of 8,128 used car listings from CarDekho (India), built with Python, Pandas, Matplotlib and Seaborn. The project covers data quality assessment, cleaning, feature engineering and visual analysis of the factors linked to a car's selling price.
 
 **Author:** Archana T, Data Science Intern

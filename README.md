@@ -60,27 +60,9 @@ used-car-prices-eda/
 ├── Used_Car_Prices_EDA.ipynb   # Full analysis notebook
 ├── requirements.txt            # Python dependencies
 ├── README.md
-├── LICENSE
-└── .gitignore
+├── visualizations
 ```
 
-## How to Run
+## Conclusion
 
-**Option 1: Google Colab.** Click the "Open in Colab" badge at the top, then choose **Runtime → Run all**.
-
-**Option 2: Locally**
-
-```bash
-git clone https://github.com/<your-username>/used-car-prices-eda.git
-cd used-car-prices-eda
-pip install -r requirements.txt
-jupyter notebook Used_Car_Prices_EDA.ipynb
-```
-
-## Tools Used
-
-Python, Pandas, NumPy, Matplotlib, Seaborn, KaggleHub, Jupyter / Google Colab
-
-## License
-
-This project is released under the MIT License.
+This analysis examined 6,926 unique used car listings after removing duplicates and fixing invalid values. Vehicle age (r = -0.72), maximum power (r = +0.65) and brand are the factors most strongly linked to selling price. Price is strongly right-skewed, so a log scale suits further analysis. Dealer, automatic and diesel cars are priced higher. For dealer and automatic cars, part of the gap is linked to age, while the diesel gap is not explained by age and may reflect car segment. Each cleaning decision is documented above, because several of them (duplicates, invalid values) changed the data. A suitable next step is a regression model on log price using age, brand and maximum power.

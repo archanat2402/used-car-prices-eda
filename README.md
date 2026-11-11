@@ -58,9 +58,9 @@ Every data change is documented in the notebook together with the reason for it.
 ```
 used-car-prices-eda/
 ├── Used_Car_Prices_EDA.ipynb   # Full analysis notebook
-├── requirements.txt            # Python dependencies
-├── README.md
-├── visualizations
+├── README.md            # Python dependencies
+├── requirements.txt
+
 ```
 
 ## Conclusion

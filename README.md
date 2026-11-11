@@ -63,7 +63,7 @@ Two visualisations were used to understand the distribution of missing values.
 
 The analysis identified missing values mainly in the technical specification columns. A total of 222 records contained at least one missing specification value.
 
-![Missing Values Analysis](Visualizations/missing_values_analysis.jpeg)
+![Missing Values Analysis](visualizations/Missing Values Analysis.jpeg)
 
 ### 2. Missing Values Heatmap
 
@@ -79,7 +79,7 @@ The IQR method identified 328 high-price records (4.74%) and 167 high-kilometre 
 
 Genuine expensive car listings were retained, while three implausible kilometre values were handled separately.
 
-![Outlier Analysis](Visualizations/outlier_analysis.jpeg)
+![Outlier Analysis](visualizations/Outlier Analysis.jpeg)
 
 ### 2. Selling Price Distribution
 
@@ -87,7 +87,7 @@ The mean selling price was approximately **INR 517,271**, while the median was *
 
 The original distribution was strongly right-skewed. Applying a log10 transformation reduced the skewness from 5.57 to approximately -0.16.
 
-![Selling Price Distribution](Visualizations/selling_price_distribution.jpeg)
+![Selling Price Distribution](visualizations/Selling Price Distribution.jpeg)
 
 ### 3. Vehicle Age vs Selling Price
 
@@ -95,7 +95,7 @@ Vehicle age showed a strong negative correlation with log selling price (**r = -
 
 In general, older cars had lower selling prices.
 
-![Vehicle Age vs Selling Price](Visualizations/vehicle_age_vs_selling_price.jpeg)
+![Vehicle Age vs Selling Price](visualizations/Vehicle Age vs Selling Price.jpeg)
 
 ### 4. Price by Fuel Type and Transmission
 
@@ -103,7 +103,7 @@ Diesel cars had a median selling price of INR 520,000 compared with INR 310,000 
 
 Automatic cars had a median selling price of INR 850,000 compared with INR 385,000 for manual cars.
 
-![Price by Fuel Type and Transmission](Visualizations/price_by_fuel_and_transmission.jpeg)
+![Price by Fuel Type and Transmission](visualizations/Price by Fuel Type and Transmission.jpeg)
 
 ### 5. Correlation Analysis
 
@@ -115,7 +115,7 @@ Important observations:
 - Engine capacity: +0.47
 - Mileage: +0.02
 
-![Correlation Heatmap](Visualizations/correlation_heatmap.jpeg)
+![Correlation Heatmap](visualizations/correlation_heatmapCorrelation Heatmap.jpeg)
 
 ### 6. Brand-Wise Analysis
 
@@ -123,7 +123,7 @@ Maruti had the highest number of listings (2,165), followed by Hyundai (1,267) a
 
 BMW, Audi and Mercedes-Benz had the highest median selling prices among brands with at least 30 listings.
 
-![Brand Analysis](Visualizations/brand_analysis.jpeg)
+![Brand Analysis](visualizations/Brand Analysis.jpeg)
 
 ### 7. Categorical Analysis
 
@@ -135,7 +135,7 @@ Key observations:
 - Five-seat vehicles were the most common (5,254).
 - Median selling price generally decreased with increasing ownership history.
 
-![Categorical Analysis](Visualizations/categorical_analysis.jpeg)
+![Categorical Analysis](visualizations/Categorical Analysis.jpeg)
 
 ---
 

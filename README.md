@@ -1,68 +1,185 @@
 # 🚗 Exploratory Data Analysis: Used Car Prices
 
-An end-to-end exploratory data analysis of 8,128 used car listings from CarDekho (India), built with Python, Pandas, Matplotlib and Seaborn. The project covers data quality assessment, cleaning, feature engineering and visual analysis of the factors linked to a car's selling price.
+## 📋 Project Details
 
-**Author:** Archana T, Data Science Intern
+This project explores used car listings in India using the CarDekho dataset. The aim is to understand the factors associated with used-car selling prices, examine data quality, and identify patterns related to vehicle age, fuel type, transmission, engine specifications, ownership and brand.
 
-## Dataset
+The analysis was performed in **Google Colab** using Python, Pandas, NumPy, Matplotlib and Seaborn. It includes data inspection, missing-value analysis, duplicate handling, data cleaning, feature engineering, outlier investigation, summary statistics and visualisation.
 
-- **Source:** [CarDekho Used Car Data (Car Details v3)](https://www.kaggle.com/datasets/nehalbirla/vehicle-dataset-from-cardekho) on Kaggle
-- **File used:** `Car details v3.csv`
-- **Size:** 8,128 rows and 13 columns (6,926 rows after removing duplicates)
-- **Columns:** name, year, selling price (INR), kilometres driven, fuel, seller type, transmission, owner, mileage, engine, max power, torque, seats
+---
 
-The dataset is downloaded automatically by the notebook using `kagglehub`, so it is not stored in this repository.
+## 📊 Dataset
 
-## Key Questions
+**Dataset:** CarDekho Used Car Data (Car Details v3)  
+**Source:** [CarDekho Used Car Dataset – Kaggle](https://www.kaggle.com/datasets/nehalbirla/vehicle-dataset-from-cardekho)
 
-1. How is the selling price distributed, and are there unusual values?
-2. How do vehicle age and kilometres driven relate to selling price?
-3. Do fuel type and transmission show a difference in price?
-4. Do dealers and individual sellers price cars differently?
+The dataset contains listings for used cars in India, including vehicle specifications, selling prices and ownership details.
 
-## Methodology
+### Dataset Details
+- Original records: **8,128**
+- Original columns: **13**
+- Data types: Numerical and categorical.
 
-1. **Structural overview:** shape, data types, memory usage, first and last records
-2. **Data quality assessment:** missing values (bar chart and heatmap) and duplicate records
-3. **Cleaning and feature engineering:** unit text converted to numbers, invalid values set to missing, `age` and `brand` features created
-4. **Univariate and bivariate analysis:** summary statistics, outlier detection, and 5+ charts, each followed by a written interpretation
-5. **Findings, limitations and conclusion**
+### Important Columns
+- `name` – Car name and model.
+- `year` – Manufacturing year.
+- `selling_price` – Selling price in INR.
+- `km_driven` – Distance driven in kilometres.
+- `fuel` – Fuel type.
+- `seller_type` – Individual, dealer or trustmark dealer.
+- `transmission` – Manual or automatic.
+- `owner` – Previous ownership category.
+- `mileage` – Mileage with its unit.
+- `engine` – Engine capacity.
+- `max_power` – Maximum engine power.
+- `torque` – Engine torque.
+- `seats` – Number of seats.
 
-Every data change is documented in the notebook together with the reason for it.
+---
 
-## Key Findings
+## ⚙️ Data Preprocessing
 
-1. **Price is strongly right-skewed.** The mean (INR 517,271) is well above the median (INR 400,000). A log10 transformation reduces the skew from 5.57 to -0.16.
-2. **Age is the factor most strongly related to price.** The correlation between age and log price is -0.72, and the median price falls about 69% between age 2 and age 10.
-3. **Engine power is more closely related to price than engine size.** Maximum power has r = +0.65 with log price, compared with +0.47 for engine size.
-4. **Brand sets the price tier.** BMW, Audi and Mercedes-Benz have median prices about 10 times that of Chevrolet. Maruti has the most listings but one of the lowest median prices.
-5. **Price gaps by transmission and seller type are partly an age effect.** Automatic and dealer cars are priced higher, but they are also about 2 years younger.
+The following preprocessing steps were performed:
 
-## Data Quality Actions
+1. **Dataset Inspection:** Checked shape, sample rows, column types, memory usage and unique values.
+2. **Missing Values:** Found missing values in `torque` (222), `seats` (221), `engine` (221), `mileage` (221) and `max_power` (215).
+3. **Missing-Value Handling:** Retained missing specification values instead of applying unnecessary imputation.
+4. **Duplicate Removal:** Removed **1,202 exact duplicate rows**, reducing the dataset from 8,128 to 6,926 records.
+5. **Numeric Conversion:** Extracted numeric portions from `mileage`, `engine` and `max_power`.
+6. **Invalid Values:** Set invalid zero mileage and unusable maximum-power values to missing.
+7. **Mileage Units:** Separated `kmpl` and `km/kg` values to maintain consistency.
+8. **Feature Engineering:** Created `age` using `2020 - year` and extracted the manufacturer as `brand`.
+9. **Outlier Handling:** Investigated unusual kilometre-driven values and created a separate `km_driven_clean` column.
 
-- 1,202 exact duplicate rows (14.79%) removed
-- About 3% of listings have no technical specifications; these were not imputed
-- Invalid zero values in `max_power` and `mileage` set to missing
-- Three implausible `km_driven` values set to missing in a separate column
-- `km/kg` mileage values (CNG/LPG cars) excluded from the `kmpl` column
+After cleaning, the dataset contained **6,926 rows and 19 columns**.
 
-## Limitations
+---
 
-- The dataset has no listing ID, so duplicates were identified by identical values in all columns.
-- Age uses 2020 as the reference year, because the collection date is not stated.
-- Group comparisons are not adjusted for age or car segment, so they show association, not cause and effect.
-- No predictive model was built. A regression on log price using age, brand and maximum power is a suitable next step.
+## 🔍 Missing Value Analysis
 
-## Repository Structure
+Two visualisations were used to understand the distribution of missing values.
 
-```
-used-car-prices-eda/
-├── Used_Car_Prices_EDA.ipynb   # Full analysis notebook
-├── README.md            # Python dependencies
-├── requirements.txt
+### 1. Missing Values Analysis
 
-```
+The analysis identified missing values mainly in the technical specification columns. A total of 222 records contained at least one missing specification value.
 
-## Conclusion
+![Missing Values Analysis](Visualizations/missing_values_analysis.png)
 
-This analysis examined 6,926 unique used car listings after removing duplicates and fixing invalid values. Vehicle age (r = -0.72), maximum power (r = +0.65) and brand are the factors most strongly linked to selling price. Price is strongly right-skewed, so a log scale suits further analysis. Dealer, automatic and diesel cars are priced higher. For dealer and automatic cars, part of the gap is linked to age, while the diesel gap is not explained by age and may reflect car segment. Each cleaning decision is documented above, because several of them (duplicates, invalid values) changed the data. A suitable next step is a regression model on log price using age, brand and maximum power.
+### 2. Missing Values Heatmap
+
+The heatmap shows that missing values frequently occur together. In particular, 215 records were missing all five technical specification fields.
+
+---
+
+## 📈 Exploratory Data Analysis
+
+### 1. Outlier Analysis
+
+The IQR method identified 328 high-price records (4.74%) and 167 high-kilometre records (2.41%).
+
+Genuine expensive car listings were retained, while three implausible kilometre values were handled separately.
+
+![Outlier Analysis](Visualizations/outlier_analysis.png)
+
+### 2. Selling Price Distribution
+
+The mean selling price was approximately **INR 517,271**, while the median was **INR 400,000**.
+
+The original distribution was strongly right-skewed. Applying a log10 transformation reduced the skewness from 5.57 to approximately -0.16.
+
+![Selling Price Distribution](Visualizations/selling_price_distribution.png)
+
+### 3. Vehicle Age vs Selling Price
+
+Vehicle age showed a strong negative correlation with log selling price (**r = -0.72**).
+
+In general, older cars had lower selling prices.
+
+![Vehicle Age vs Selling Price](Visualizations/vehicle_age_vs_selling_price.png)
+
+### 4. Price by Fuel Type and Transmission
+
+Diesel cars had a median selling price of INR 520,000 compared with INR 310,000 for petrol cars.
+
+Automatic cars had a median selling price of INR 850,000 compared with INR 385,000 for manual cars.
+
+![Price by Fuel Type and Transmission](Visualizations/price_by_fuel_and_transmission.png)
+
+### 5. Correlation Analysis
+
+The correlation heatmap highlights relationships between selling price and numerical features.
+
+Important observations:
+- Age: -0.72
+- Maximum power: +0.65
+- Engine capacity: +0.47
+- Mileage: +0.02
+
+![Correlation Heatmap](Visualizations/correlation_heatmap.png)
+
+### 6. Brand-Wise Analysis
+
+Maruti had the highest number of listings (2,165), followed by Hyundai (1,267) and Mahindra (723).
+
+BMW, Audi and Mercedes-Benz had the highest median selling prices among brands with at least 30 listings.
+
+![Brand Analysis](Visualizations/brand_analysis.png)
+
+### 7. Categorical Analysis
+
+The analysis explored ownership, seller type and seating capacity.
+
+Key observations:
+- First-owner vehicles represented the largest ownership group (4,242).
+- Individual sellers accounted for 6,218 listings.
+- Five-seat vehicles were the most common (5,254).
+- Median selling price generally decreased with increasing ownership history.
+
+![Categorical Analysis](Visualizations/categorical_analysis.png)
+
+---
+
+## 💡 Key Findings
+
+1. **Price Distribution:** Used car prices are strongly right-skewed.
+2. **Vehicle Age:** Older vehicles generally have lower selling prices.
+3. **Engine Power:** Maximum power has a positive correlation with selling price.
+4. **Brand Influence:** Luxury brands have higher median selling prices.
+5. **Fuel and Transmission:** Diesel and automatic cars show higher median prices in this dataset.
+6. **Data Quality:** Removing duplicates and handling invalid values improved data consistency.
+
+---
+
+## 🛠️ Technologies Used
+
+- Python
+- Pandas
+- NumPy
+- Matplotlib
+- Seaborn
+- Google Colab
+- Kaggle
+
+---
+
+## ⚠️ Limitations
+
+- Some vehicle specifications contain missing values.
+- Vehicle age was calculated using 2020 as the reference year.
+- Correlation does not establish causation.
+- Different mileage units were handled separately.
+- No predictive machine learning model was developed.
+
+---
+
+## 🎯 Conclusion
+
+This project analysed 6,926 used-car listings after removing duplicate records and handling invalid values.
+
+The analysis revealed that vehicle age, maximum power, engine capacity and brand are meaningfully associated with selling prices.
+
+Overall, this project provided practical experience in Python-based data cleaning, feature engineering, statistical analysis, outlier investigation and data visualisation.
+
+**Project Type:** Exploratory Data Analysis (EDA)  
+**Environment:** Google Colab  
+**Dataset:** CarDekho Used Car Data (Car Details v3)
